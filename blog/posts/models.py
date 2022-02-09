@@ -13,6 +13,9 @@ class Post(models.Model):
     created_date = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
     modified_date = models.DateTimeField(auto_now=True, verbose_name='수정날짜')
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         db_table = 'post'
         verbose_name = '글'
@@ -27,6 +30,9 @@ class Comment(models.Model):
     content = models.TextField(verbose_name='댓글내용')
     created_date = models.DateTimeField(auto_now_add=True, verbose_name='등록날짜')
     modified_date = models.DateTimeField(auto_now=True, verbose_name='수정날짜')
+
+    def __str__(self):
+        return self.content
 
     class Meta:
         db_table = 'comment'

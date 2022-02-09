@@ -10,6 +10,9 @@ class User(models.Model):
     register_date = models.DateTimeField(
         auto_now_add=True, verbose_name='등록날짜')
 
+    def __str__(self):
+        return self.username
+
     class Meta:
         db_table = 'user'
         verbose_name = '사용자'
