@@ -5,6 +5,10 @@ from .forms import RegisterForm, LoginForm
 # Create your views here.
 
 
+def index(request):
+    return render(request, 'blogs/blog.html')
+
+
 class RegisterView(FormView):
     template_name = 'registration/register.html'
     form_class = RegisterForm
