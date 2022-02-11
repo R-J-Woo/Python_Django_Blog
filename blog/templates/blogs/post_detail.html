@@ -1,78 +1,108 @@
-{% extends "blogs/_base.html" %}
-{% load social_share %}
-{% block content %}
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <!-- 글 본문 -->
-        <h1>{{ post.title }}</h1>
-        <hr>
-        {% if post.image %}
-          <img src="{{ post.image.url }}">
-        {% endif %}
-        <p>{{ post.content }}</p>
+{% extends "registration/base.html" %}
+{% block contents %}
+
+<div class="container">
+  <header class="blog-header py-3">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-4 pt-1">
+      </div>
+      <div class="col-4 text-center">
+        <h3>
+          <a class="blog-header-logo text-dark" href="/">Blog Project</a>
+        </h3>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center">
+        <a class="link-secondary" href="#" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24">
+            <title>Search</title>
+            <circle cx="10.5" cy="10.5" r="7.5" />
+            <path d="M21 21l-5.2-5.2" />
+          </svg>
+        </a>
+        <a class="btn btn-sm btn-outline-secondary me-2" href="login/">로그인</a>
+        <a class="btn btn-sm btn-outline-secondary" href="register/">회원가입</a>
       </div>
     </div>
+  </header>
 
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-      <!-- 태그 달기 -->
-      {% for tag in post.tags.all %}
-        <span class="badge badge-dark">
-          #{{ tag.name }}
-        </span>
-      {% endfor %}
-  
-      <!-- 소셜 공유 -->
-      <button type="button" class="btn btn-light float-right">
-        {% post_to_facebook post.get_absolute "facebook" %}
-      </button>
-      <button type="button" class="btn btn-light float-right">
-        {% send_email post.title "New Song: {{post.title}}. Check it out!" object_or_url "Share via email" %}
-      </button>
-      </div>
+  <div class="nav-scroller py-1 mb-2">
+    <nav class="nav d-flex justify-content-center">
+      <a class="p-2 link-secondary" href="posts/">모든 글 보기</a>
+      <a class="p-2 link-secondary" href="#">책 이야기</a>
+      <a class="p-2 link-secondary" href="#">개발 이야기</a>
+      <a class="p-2 link-secondary" href="#">일기장</a>
+    </nav>
+  </div>
+</div>
+
+<main class="container">
+  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+    <div class="col-md-6 px-0">
+      <h1 class="display-4 fst-italic">안녕하세요 여러분!</h1>
+      <p class="lead my-3">제 블로그에 오신 것을 진심으로 환영합니다!</p>
     </div>
+  </div>
 
-    <!-- 댓글 목록 -->
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 comment-bg">
-        <div class="page-header">
-          <h1>Comments</h1>
-        </div>
-        <div class="comments-list">
-          {% for comment in comments %}
-            <div class="media">
-              <div class="media-body">
-                <h4 class="media-heading user_name">
-                  {{ comment.user }}
-                </h4>
-                  {{ comment.content }}
-                <hr>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      
-    <!-- 댓글 등록하기 -->
-    <div class="row">
-      {% if errors %}
-        <ul>
-          {% for error in errors %}
-            <li><div class="alert alert-primary">{{ error }}</div></li>
-          {% endfor %}
-        </ul>
+  <div class="row g-5">
+    <div class="col-md-8">
+      <h3 class="pb-4 mb-4 fst-italic border-bottom fw-bold">
+        {{ post.title }}
+      </h3>
+      <!-- 글 본문 -->
+      {% if post.image %}
+      <img src="{{ post.image.url }}">
       {% endif %}
-      <h3>댓글 쓰기</h3>
-      <form method="post" action="{% url 'comment_write' %}" enctype="multipart/form-data" class="col-lg-8 col-md-10 mx-auto">
-        {% csrf_token %}
-        <input type="hidden" name="post_id" value="{{ post.id }}">
-        <div class="form-group row">
-          <textarea class="form-control" name="content" rows="7"></textarea>
-        </div>
-        <div class="form-group row float-right">
-          <button type="submit" class="btn btn-primary">저장하기</button>
-        </div>
-      </form>
+      <div class="border-bottom">
+        <p class="mx-5 mt-5 mb-5">{{ post.content }}</p>
+      </div>
     </div>
+
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+        <div class="p-4 mb-3 bg-light rounded">
+          <h4 class="fst-italic">About</h4>
+          <p class="mb-0">Customize this section to tell your visitors a little bit about your publication, writers,
+            content, or something else entirely. Totally up to you.</p>
+        </div>
+
+        <div class="p-4">
+          <h4 class="fst-italic">Archives</h4>
+          <ol class="list-unstyled mb-0">
+            <li><a href="#">March 2021</a></li>
+            <li><a href="#">February 2021</a></li>
+            <li><a href="#">January 2021</a></li>
+            <li><a href="#">December 2020</a></li>
+            <li><a href="#">November 2020</a></li>
+            <li><a href="#">October 2020</a></li>
+            <li><a href="#">September 2020</a></li>
+            <li><a href="#">August 2020</a></li>
+            <li><a href="#">July 2020</a></li>
+            <li><a href="#">June 2020</a></li>
+            <li><a href="#">May 2020</a></li>
+            <li><a href="#">April 2020</a></li>
+          </ol>
+        </div>
+
+        <div class="p-4">
+          <h4 class="fst-italic">Elsewhere</h4>
+          <ol class="list-unstyled">
+            <li><a href="#">GitHub</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Facebook</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="blog-footer">
+  <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a
+      href="https://twitter.com/mdo">@mdo</a>.</p>
+  <p>
+    <a href="#">Back to top</a>
+  </p>
+</footer>
 {% endblock %}
