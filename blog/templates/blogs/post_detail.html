@@ -55,12 +55,12 @@
       {% endif %}
       <p class="mx-5 mt-5 mb-5">{{ post.content }}</p>
       <h4 class="pb-4 mb-4 fst-italic border-bottom fw-bold">
-        댓글
+        Comments
       </h4>
       {% for comment in comments %}
       <div class="border-bottom">
-        <h5 class="mx-5 mt-5 mb-5">{{ comment.user }}</h5>
-        <p>{{ comment.content }}</p>
+        <h6 class="mx-2 mt-2 mb-4 fw-bold">{{ comment.user }}</h5>
+          <p class="mx-5">{{ comment.content }}</p>
       </div>
       {% endfor %}
     </div>
