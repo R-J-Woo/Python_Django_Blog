@@ -22,7 +22,7 @@ class LoginView(FormView):
 
     def form_valid(self, form):
         self.request.session['user'] = form.user_id
-        return super().form_valid()
+        return super().form_valid(form)
 
 
 def logout(request):
